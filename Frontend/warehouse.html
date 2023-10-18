@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<title>Update Warehouse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<body>
+  <div class="container mt-3">
+    <h3 class="long">Update Warehouse</h3>
+    <form>
+      <div class="row">
+        <div class="col" style="float: left;">
+          <input type="text" class="form-control" placeholder="Product Name" name="ProductID">
+        </div>
+        <div class="col" style="float: left;">
+          <input type="text" class="form-control" placeholder="Add to Current Availability" name="CurrentAvail">
+        </div>
+        <div class="col" style="float: left;">
+          <input type="submit" value="Update" class="form-control Update" placeholder="Register" name="btnRegister">
+        </div>
+    </form>
+  </div>
+
+  <div>
+    <h3 class="short">Warehouse</h3>
+    <table id='warehouseTable'>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <!-- <th>Product Name</th> -->
+          <th>Current Availability</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+  <script>
+    fetch('http://localhost:3000/api/warehouse', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }) // Replace with your actual API endpoint
+      .then(response => response.json())
+      .then(data => {
+        const warehouseTable = document.getElementById('warehouseTable');
+        const tbody = warehouseTable.querySelector('tbody');
+
+        data.forEach(warehouse => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${warehouse.Name}</td>
+            <td>${warehouse.Current_Availability}</td>
+          `;
+          tbody.appendChild(row);
+
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data: ' + error);
+      });
+  </script>
+</body>
+
+</html>

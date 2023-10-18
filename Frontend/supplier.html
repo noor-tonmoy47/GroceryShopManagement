@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Supplier Information</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+</head>
+
+<body>
+
+  <div class="container mt-3">
+    <form>
+      <h3>Add Supplier</h3>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control Supplier" placeholder="Supplier Name" name="SupplierName">
+        </div>
+        <div class="col">
+          <input type="tel" class="form-control Supplier" placeholder="Contact Info" name="ContactInfo">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control Supplier" placeholder="Address" name="Address">
+        </div>
+        <div class="col">
+          <input type="submit" value="Add" class="form-control btnSupplier" placeholder="Register"
+            name="btnAddSupplier">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container mt-3">
+    <h3>Supplier List</h3>
+    <table id='supplierTable'>
+      <thead>
+        <tr>
+          <th>Supplier ID</th>
+          <th>Supplier Name</th>
+          <th>ContactInfo</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+  <script>
+    fetch('http://localhost:3000/api/suppliers', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }) // Replace with your actual API endpoint
+      .then(response => response.json())
+      .then(data => {
+        const supplierTable = document.getElementById('supplierTable');
+        const tbody = supplierTable.querySelector('tbody');
+
+        data.forEach(supplier => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${supplier.SupplierID}</td>
+            <td>${supplier.SupplierName}</td>
+            <td>${supplier.ContactInfo}</td>
+            <td>${supplier.Address}</td>
+          `;
+          tbody.appendChild(row);
+
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data: ' + error);
+      });
+  </script>
+</body>
+
+</html>
