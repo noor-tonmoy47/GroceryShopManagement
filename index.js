@@ -59,6 +59,22 @@ app.get('/api/warehouse', (req, res) => {
     });
 });
 
+//Displaying the Products
+
+app.get('/api/products', (req, res) => {
+
+    const sql = 'SELECT products.ProductID, products.Name, (SELECT categories.CategoryName FROM categories WHERE products.CategoryID = categories.CategoryID) AS Category, (SELECT suppliers.SupplierName FROM suppliers WHERE products.SupplierID = suppliers.SupplierID) AS Supplier, products.ExpiryDate, products.Price FROM products';
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error executing the query: ' + err.stack);
+            return res.status(500).send('Error retrieving data from the database.');
+        }
+
+        res.json(results);
+    });
+});
+
 
 //  Register new product
 

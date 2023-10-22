@@ -1,0 +1,117 @@
+/* Basic styling for the navigation bar */
+body {
+    background-image: url(doodle_food_pattern.jpg);
+    background-size: cover;
+}
+
+#logo {
+    position: relative;
+    left: 20%;
+    top: 10%;
+}
+
+#navbar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #274a55;
+    padding-top: 20px;
+}
+
+/* Style for the navigation buttons */
+#buttonField {
+    position: fixed;
+
+    top: 35%;
+
+}
+
+#navbar a {
+    padding: 22px 35px;
+
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+}
+
+/* Change button color on hover */
+#navbar a:hover {
+    background-color: #091118;
+}
+
+.contentArea {
+    /* max-width: 600px; */
+    margin: auto;
+    padding: 20px;
+    /* margin-left: 470px; */
+}
+
+/* Style the container */
+/* .container.products {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; */
+/* margin-left: 270px; */
+/* } */
+.containerProducts {
+    margin: auto;
+}
+
+h3 {
+
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    /* margin: auto; */
+    padding: auto;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 750px;
+    background-color: #2C5F2D;
+    color: #ffffff;
+    width: 300px;
+    border-radius: 5px;
+}
+
+/* Style the table */
+table {
+    width: 65%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    /* margin: auto; */
+    margin-left: 400px;
+    /* align-content: center; */
+    margin-bottom: 30px;
+}
+
+/* Style the table headers */
+th {
+    background-color: #2C5F2D;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    margin: auto;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: whitesmoke;
+}
+
+tr:nth-child(even) {
+    background-color: gainsboro;
+}
+
+/* Style the table rows */
+
+
+/* Style table cell padding and text alignment */

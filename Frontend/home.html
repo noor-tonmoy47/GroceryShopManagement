@@ -2,23 +2,81 @@
 <html>
 
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Grocery Management</title>
+        <link rel="stylesheet" href="homepageStyles.css">
+        <link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
+
 </head>
 
 <body>
-    <div class="btn-group-vertical">
-        <a href="Invoice.html" style="text-decoration: none;"><button type="button"
-                class="btn button1">Invoice</button></a>
-        <a href="regiter.html" style="text-decoration: none;"><button type="button" class="btn button2">Register
-                Product</button></a>
-        <a href="supplier.html" style="text-decoration: none;"><button type="button" class="btn button3">Suppliers
-                Information</button></a>
-        <a href="warehouse.html" style="text-decoration: none;"><button type="button"
-                class="btn button4">Warehouse</button></a>
-        <a href="sales.html" style="text-decoration: none;"><button type="button" class="btn button5">Sales
-                Record</button></a>
-    </div>
+
+        <div id="navbar">
+                <img id="logo" src="/Frontend/Logo.png" alt="Image of a shopping trolly" width="100px">
+                <div id="buttonField">
+                        <a href="/Frontend/regiter.html">New Product</a>
+
+                        <a href="/Frontend/supplier.html">Suppliers</a>
+                        <a href="/Frontend/warehouse.html">Visit Warehouse</a>
+                        <a href="/Frontend/Invoice.html">Invoice</a>
+                        <a href="/Frontend/sales.html">Sales</a>
+                </div>
+        </div>
+
+
+        <div class="ContentArea">
+                <div class="containerProducts">
+                        <h3>Products List</h3>
+                        <table id='productsTable'>
+                                <thead>
+                                        <tr>
+                                                <th>ProductsID</th>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Supplier</th>
+                                                <th>ExpiryDate</th>
+                                                <th>Price</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                        </table>
+                </div>
+        </div>
+
+        <script>
+                fetch('http://localhost:3000/api/products', {
+                        method: 'GET',
+                        headers: {
+                                'Content-Type': 'application/json'
+                        },
+                }) // Replace with your actual API endpoint
+                        .then(response => response.json())
+                        .then(data => {
+                                const productsTable = document.getElementById('productsTable');
+                                const tbody = productsTable.querySelector('tbody');
+
+                                data.forEach(products => {
+                                        const row = document.createElement('tr');
+                                        row.innerHTML = `
+                                <td>${products.ProductID}</td>
+                                <td>${products.Name}</td>
+                                <td>${products.Category}</td>
+                                <td>${products.Supplier}</td>
+                                <td>${products.ExpiryDate}</td>
+                                <td>${products.Price}</td>
+                            `;
+                                        tbody.appendChild(row);
+
+                                });
+                        })
+                        .catch(error => {
+                                console.error('Error fetching data: ' + error);
+                        });
+        </script>
+
 </body>
 
 </html>
