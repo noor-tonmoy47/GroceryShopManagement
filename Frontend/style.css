@@ -1,9 +1,9 @@
-body{
+body {
     background-image: url(doodle_food_pattern.jpg);
-    background-size:cover;
+    background-size: cover;
 }
 
-h3{
+h3 {
     text-align: center;
     font-weight: bold;
     margin: auto;
@@ -16,7 +16,7 @@ h3{
     border-radius: 5px;
 }
 
-.long{
+.long {
     text-align: center;
     font-weight: bold;
     margin: auto;
@@ -25,17 +25,17 @@ h3{
     margin-bottom: 25px;
     background-color: #2C5F2D;
     color: #ffffff;
-    width: 300px; 
+    width: 300px;
 }
 
-.short{
+.short {
     text-align: center;
     font-weight: bold;
     margin: auto;
     padding: auto;
     margin-top: 15px;
     margin-bottom: 25px;
-    background-color:  #2C5F2D;
+    background-color: #2C5F2D;
     color: #ffffff;
     width: 150px;
 }
@@ -45,37 +45,40 @@ table {
     border-collapse: collapse;
     width: 95%;
     margin-left: 35px;
+    margin-bottom: 30px;
 }
 
 thead th {
-	background-color:#2C5F2D;
-	font-family: Open Sans;
-	font-size: 18px;
-	color: #ffffff;
+    background-color: #2C5F2D;
+    font-family: Open Sans;
+    font-size: 18px;
+    color: #ffffff;
 }
 
-td, th {
-   border: 1px solid #dddddd;
-   text-align: center;
-   padding: 8px;
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
 }
 
 tr:nth-child(odd) {
-    background-color:whitesmoke;
+    background-color: whitesmoke;
 }
+
 tr:nth-child(even) {
-  background-color:gainsboro;
+    background-color: gainsboro;
 }
-  
-.btn{
-    background-color:#2C5F2D;
-    border:none;
+
+.btn {
+    background-color: #2C5F2D;
+    border: none;
     border-radius: 5px;
     color: white;
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
-    display:block;
+    display: block;
     font-size: 22px;
     margin: auto;
     margin-top: 5px;
@@ -85,56 +88,56 @@ tr:nth-child(even) {
     height: 100px;
 }
 
-.button1{
+.button1 {
     margin-top: 100px;
 }
 
-.form-control{
-    display:inline-block;
+.form-control {
+    display: inline-block;
     margin-left: 135px;
-    border-color:  #2C5F2D;
+    border-color: #2C5F2D;
     border-width: 2px;
 }
 
-.Supplier{
+.Supplier {
     margin-left: 5px;
 }
 
-.btnSupplier{
+.btnSupplier {
     margin-left: 5px;
     background-color: #2C5F2D;
     color: #ffffff;
 }
 
-.Update{
+.Update {
     width: 200px;
     height: 36px;
     font-size: 16px;
     text-align: center;
     margin-left: 135px;
-    background-color:  #2C5F2D;
+    background-color: #2C5F2D;
     color: #ffffff;
     border-radius: 5px;
 }
 
 
-.warehouseTable{
+.warehouseTable {
     width: 75%;
     margin-left: 175px;
 }
 
 /*Register*/
 
-.Register{
+.Register {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
-  
-  .RegisterBtn{
+}
+
+.RegisterBtn {
     width: 100%;
     background-color: #2C5F2D;
     color: white;
@@ -143,33 +146,34 @@ tr:nth-child(even) {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  .Reg{
+}
+
+.Reg {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-  }
+}
 
-  /*Register button*/
+/*Register button*/
 
-  .Regg{
+.Regg {
     background-color: #2C5F2D;
     border-radius: 5px;
     color: #ffffff;
-  }
-  /*Invoice*/
+}
 
-  .UnitPrice{
+/*Invoice*/
+
+.UnitPrice {
     margin-left: 135px;
     background-color: white;
     text-align: center;
     width: 250px;
-  }
+}
 
-  .Add{
-    background-color:  #2C5F2D;
+.Add {
+    background-color: #2C5F2D;
     margin-left: 2px;
     width: 100px;
     color: white;
-  }
+}

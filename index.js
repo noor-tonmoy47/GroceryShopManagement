@@ -76,6 +76,38 @@ app.get('/api/products', (req, res) => {
 });
 
 
+//Getting all the product names
+
+app.get('/api/getProducts', (req, res) => {
+    const sql = 'SELECT Name FROM products';
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error executing the query: ' + err.stack);
+            return res.status(500).send('Error retrieving data from the database.');
+        }
+
+        res.json(results);
+    });
+});
+
+
+//Getting all the category names
+
+app.get('/api/getCategory', (req, res) => {
+    const sql = `SELECT CategoryName FROM categories`;
+
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error executing the query: ' + err.stack);
+            return res.status(500).send('Error retrieving data from the database.');
+        }
+
+        res.json(results);
+    });
+});
+
 //  Register new product
 
 app.post('/suppliers/register', (req, res) => {

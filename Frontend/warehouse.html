@@ -2,13 +2,15 @@
 <html>
 <title>Update Warehouse</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="style.css">
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<link rel="stylesheet" href="warehouse.css">
+
 <body>
-  <div class="container mt-3">
+  <!-- <div class="container mt-3">
     <h3 class="long">Update Warehouse</h3>
     <form>
       <div class="row">
@@ -21,8 +23,33 @@
         <div class="col" style="float: left;">
           <input type="submit" value="Update" class="form-control Update" placeholder="Register" name="btnRegister">
         </div>
-    </form>
+      </form>
+    </div> -->
+  <div id="dropdownCategory">
+
+    <!-- <label for="Products">Select The Product</label> -->
+
+    <select name="Category" id="Category">
+      <option value="hidden" style="display: none;">Category</option>
+      <!-- <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option> -->
+    </select>
+    <select name="Products" id="Products">
+      <option value="hidden" style="display: none;">Products</option>
+      <!-- <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option> -->
+    </select>
+
+    <input type="number" id="numberInput" name="points" step="1">
+
+    <button id="buttonInput"> Add </button>
   </div>
+
+
+
 
   <div>
     <h3 class="short">Warehouse</h3>
@@ -39,32 +66,11 @@
       </tbody>
     </table>
   </div>
-  <script>
-    fetch('http://localhost:3000/api/warehouse', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }) // Replace with your actual API endpoint
-      .then(response => response.json())
-      .then(data => {
-        const warehouseTable = document.getElementById('warehouseTable');
-        const tbody = warehouseTable.querySelector('tbody');
 
-        data.forEach(warehouse => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${warehouse.Name}</td>
-            <td>${warehouse.Current_Availability}</td>
-          `;
-          tbody.appendChild(row);
 
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching data: ' + error);
-      });
-  </script>
+  <script src="warehouse.js"></script>
+
+
 </body>
 
 </html>

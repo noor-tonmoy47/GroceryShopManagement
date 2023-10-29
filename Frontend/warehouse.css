@@ -1,0 +1,85 @@
+#dropdownCategory {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    /* background-color: #2C5F2D; */
+    color: #ffffff;
+
+    position: relative;
+    /* left: 70px; */
+    top: 48px;
+    /* width: 100px; */
+    height: 50px;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-bottom: 70px;
+    /* border-radius: 5px;
+      margin-bottom: 20px;
+      margin-left: 170px;
+      margin-top: 40px; */
+}
+
+#Category {
+    position: absolute;
+
+    left: 150px;
+    margin-right: 90px;
+    height: 50px;
+}
+
+#Products {
+    position: absolute;
+    left: 380px;
+    margin-left: 90px;
+    margin-right: 70px;
+}
+
+
+
+#numberInput {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background: #fff;
+    /* margin-top: 10px; */
+    margin-left: 30px;
+    margin-right: 30px;
+    position: absolute;
+    left: 780px;
+    top: 5px;
+}
+
+
+
+#buttonInput {
+    font-size: 16px;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background: #2C5F2D;
+    color: #fff;
+    position: absolute;
+    left: 1120px;
+    top: 5px;
+}
+
+/* Style the label */
+
+/* Style the select element (dropdown) */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+}
+
+/* Style the options in the dropdown */
+option {
+    font-size: 16px;
+    background-color: #f2f2f2;
+}
