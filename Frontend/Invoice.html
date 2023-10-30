@@ -6,36 +6,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="invoice.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
 
-  <div class="container mt-3">
-    <form>
-      <h3 class="long">Product Purchase</h3>
-      <div class="row">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Product Name" name="ProductName">
-        </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Quantity" name="Quantity">
-        </div>
-        <div class="col" style="display: flex; align-items: center;">
-          <!-- <input type="text" class="form-control" placeholder="Price" name="Price"> -->
-          <p class="form-control UnitPrice"> Unit Price </p>
-        </div>
-        <div class="col">
-          <input type="submit" value="Add" class="form-control Add" placeholder="Add" name="btnInvoice">
-        </div>
-      </div>
-    </form>
+  <div class="container">
+    <h3 id="headline">Product Purchase</h3>
+    <select name="Category" id="Category">
+      <option value="hidden" style="display: none;"> Category</option>
+    </select>
+
+    <select name="Product" id="Product">
+      <option value="hidden" style="display: none;"> Product</option>
+    </select>
+
+    <input type="number" id="QuanInput" placeholder="Quantity" name="Quantity">
+
+    <label for="myText">UnitPrice: </label>
+    <input type="text" id="myText" name="myText" readonly>
   </div>
 
   <div class="w3-container">
-    <h3 class="short">Invoice</h3>
+    <h3 class="short" style="font-size: 23px;">Invoice</h3>
 
     <table>
       <thead>
