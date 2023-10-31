@@ -59,15 +59,26 @@
                                 const tbody = productsTable.querySelector('tbody');
 
                                 data.forEach(products => {
+
+                                        const dateTimeString = products.ExpiryDate;
+                                        let dateOnly;
+                                        if (dateTimeString !== null) {
+
+                                                dateOnly = new Date(dateTimeString).toISOString().split('T')[0];
+                                        }
+                                        else {
+                                                dateOnly = dateTimeString;
+                                        }
+                                        // console.log(dateOnly); // Output: "2024-06-12"
                                         const row = document.createElement('tr');
                                         row.innerHTML = `
-                                <td>${products.ProductID}</td>
-                                <td>${products.Name}</td>
-                                <td>${products.Category}</td>
-                                <td>${products.Supplier}</td>
-                                <td>${products.ExpiryDate}</td>
-                                <td>${products.Price}</td>
-                            `;
+                                                <td>${products.ProductID}</td>
+                                                <td>${products.Name}</td>
+                                                <td>${products.Category}</td>
+                                                <td>${products.Supplier}</td>
+                                                <td>${dateOnly}</td>
+                                                <td>${products.Price}</td>
+                                        `;
                                         tbody.appendChild(row);
 
                                 });

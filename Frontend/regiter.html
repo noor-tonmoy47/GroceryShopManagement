@@ -28,7 +28,7 @@
     <!-- <input type="text" class="Register" id="SupplierName" name="SupplierName" placeholder="Supplier Name"> -->
     <input type="date" class="Register" id="ExpiryDate" name="ExpiryDate" placeholder="ExpiryDate">
     <input type="number" class="Register" id="numberInput" name="points" placeholder="Quantity">
-    <input type="text" class="Register" id="UnitPrice" name="UnitPrice" placeholder="UnitPrice">
+    <input type="number" class="Register" id="UnitPrice" name="UnitPrice" placeholder="UnitPrice">
 
     <button id="RegisterButton"> Register </button>
 
@@ -72,13 +72,22 @@
         const tbody = productsTable.querySelector('tbody');
 
         data.forEach(products => {
+          const dateTimeString = products.ExpiryDate;
+          let dateOnly;
+          if (dateTimeString !== null) {
+
+            dateOnly = new Date(dateTimeString).toISOString().split('T')[0];
+          }
+          else {
+            dateOnly = dateTimeString;
+          }
           const row = document.createElement('tr');
           row.innerHTML = `
                                 <td>${products.ProductID}</td>
                                 <td>${products.Name}</td>
                                 <td>${products.Category}</td>
                                 <td>${products.Supplier}</td>
-                                <td>${products.ExpiryDate}</td>
+                                <td>${dateOnly}</td>
                                 <td>${products.Price}</td>
                             `;
           tbody.appendChild(row);
