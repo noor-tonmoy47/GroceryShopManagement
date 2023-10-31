@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Generate Receipt</title>
+  <title>Product Purchase</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
@@ -27,12 +27,14 @@
 
     <label for="myText">UnitPrice: </label>
     <input type="text" id="myText" name="myText" readonly>
+
+    <button id="addbtn"> Add </button>
   </div>
 
   <div class="w3-container">
     <h3 class="short" style="font-size: 23px;">Invoice</h3>
 
-    <table>
+    <table id="invoice">
       <thead>
         <tr>
           <th>Product Name</th>
@@ -41,10 +43,48 @@
           <th>Total</th>
         </tr>
       </thead>
+      <tbody>
+
+      </tbody>
     </table>
   </div>
 
+  <div id="info">
+    <button id="pdf"> Generate Receipt </button>
+  </div>
+  <script>
+    fetch('http://localhost:3000/api/suppliers', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }) // Replace with your actual API endpoint
+      .then(response => response.json())
+      .then(data => {
+        const invoiceTable = document.getElementById('invoice');
+        const tbody = invoiceTable.querySelector('tbody');
 
+        data.forEach(supplier => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${supplier.SupplierID}</td>
+            <td>${supplier.SupplierName}</td>
+            <td>${supplier.ContactInfo}</td>
+            <td>${supplier.Address}</td>
+          `;
+          tbody.appendChild(row);
+
+        });
+        const row = document.createElement('tr');
+        row.innerHTML = `<td colspan="2"></td>
+                      <td style ="font-weight : bold;">Total Payable:</td>
+                        <td id = "total"></td>`;
+        tbody.appendChild(row);
+      })
+      .catch(error => {
+        console.error('Error fetching data: ' + error);
+      });
+  </script>
 </body>
 
 </html>

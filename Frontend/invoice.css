@@ -21,6 +21,18 @@
     padding-right: 40px;
 }
 
+#info {
+    height: 100px;
+    top: 0px;
+    margin-top: 0px;
+    /* margin-top: 50px; */
+    margin-bottom: 30px;
+}
+
+table {
+    margin-bottom: 90px;
+}
+
 #headline {
     /* margin-top: 20px; */
     /* padding-bottom: 20px; */
@@ -55,8 +67,11 @@ label {
     width: 100px;
     border-radius: 5px; */
     display: inline-block;
-    width: 150px;
+    width: 130px;
+    height: 30px;
+    text-align: center;
     background-color: #2C5F2D;
+    color: #fff;
     border-radius: 5px;
     margin-right: 30px;
 }
@@ -68,6 +83,28 @@ label {
     width: 100px;
     height: 30px;
     text-align: center;
+}
+
+#addbtn,
+#pdf {
+    font-size: 16px;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background: #2C5F2D;
+    color: #fff;
+    margin-left: 30px;
+
+}
+
+#pdf {
+    font-size: 23px;
+    width: 250px;
+    height: 40px;
+    margin-left: 100px;
+    /* margin-right: 530px; */
 }
 
 select {
