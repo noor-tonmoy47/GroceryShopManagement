@@ -30,7 +30,7 @@
 
     <!-- <label for="Products">Select The Product</label> -->
 
-    <select name="Category" id="Category">
+    <select name="Category" id="Category" onchange="optionSelected()">
       <option value="hidden" style="display: none;">Category</option>
       <!-- <option value="saab">Saab</option>
         <option value="mercedes">Mercedes</option>
@@ -44,9 +44,9 @@
         <option value="audi">Audi</option> -->
     </select>
 
-    <input type="number" id="numberInput" name="points" step="1">
+    <input type="number" id="numberInput" name="points" step="1" min="0">
 
-    <button id="buttonInput"> Add </button>
+    <button id="buttonInput" onclick="addWarehouse()"> Add </button>
   </div>
 
 

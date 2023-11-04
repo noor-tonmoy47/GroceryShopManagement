@@ -109,6 +109,26 @@ app.get('/api/suppliers', (req, res) => {
     });
 });
 
+
+app.post('/api/warehouseUpdate', (req, res) => {
+
+    const { name, quantity } = req.body;
+
+    const sqlQuery = `Update warehouse SET Current_Availability = Current_Availability + ? WHERE ProductID = (SELECT products.ProductID FROM products WHERE products.Name = ?)`;
+
+    db.query(sqlQuery, [quantity, name], (err, result) => {
+        if (err) {
+            console.log(30);
+
+            console.error('Could not update the warehouse' + err);
+            return res.status(500).json({ error: 'Internal server error' });
+
+        }
+        return res.status(201).json({ message: `Warehouse updated` })
+    });
+
+});
+
 //Displaying the warehouse table
 app.get('/api/warehouse', (req, res) => {
 
@@ -155,6 +175,22 @@ app.get('/api/getProducts', (req, res) => {
         res.json(results);
     });
 });
+
+app.post('/api/getCategoryProducts', (req, res) => {
+    const { category } = req.body;
+
+    const sql = 'SELECT products.Name FROM products WHERE products.CategoryID = (SELECT categories.CategoryID FROM categories WHERE categories.CategoryName = ?)'
+
+    db.query(sql, [category], (err, results) => {
+        if (err) {
+            console.error('Error executing the query: ' + err.stack);
+            return res.status(500).send('Error retrieving data from the database.');
+        }
+
+        res.json(results);
+    });
+});
+
 
 
 //Getting all the category names
