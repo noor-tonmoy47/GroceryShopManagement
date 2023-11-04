@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
-
 const app = express();
 const PORT = 3000;
 
@@ -29,6 +28,72 @@ db.connect((err) => {
 });
 
 
+//Login 
+app.post('/api/login', (req, res) => {
+    console.log("1")
+    const { username, password } = req.body;
+
+
+    // Checking if the username and password are provided
+    if (username.length === 0 || password === 0) {
+        return res.status(400).json({ error: 'Username and password are required.' });
+    }
+    console.log("1")
+
+    // Checking if the user exists in the database
+    const sql = 'SELECT * FROM users WHERE User_Name = ? AND User_Password = ?';
+    db.query(sql, [username, password], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Internal server error.' });
+        }
+
+        // If the user with the provided username doesn't exist
+        if (results.length === 0) {
+            return res.status(401).json({ error: 'Invalid username or password.' });
+        }
+
+
+        //Generate a JWT token and send it as a response
+        const token = jwt.sign({ username: username, role: 'admin' }, secretKey, { expiresIn: '1h' });
+        return res.status(200).json({ token: token });
+
+
+    });
+});
+
+// signup
+
+app.post('/api/signup', (req, res) => {
+    const { username, useremail, password } = req.body;
+
+    // Check if the username and password are provided
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Username and password are required.' });
+    }
+
+    // Check if the username is already taken
+    const checkUserSql = 'SELECT * FROM adminInfo WHERE User_Name = ?';
+    db.query(checkUserSql, [username], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Internal server error.' });
+        }
+
+        // If the username is already taken
+        if (results.length > 0) {
+            return res.status(409).json({ error: 'Username is already taken.' });
+        }
+
+        // Insert the new user into the database
+        const insertUserSql = 'INSERT INTO adminInfo (User_Name, User_Email, User_Password) VALUES (?, ?, ?)';
+        db.query(insertUserSql, [username, useremail, password], (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: 'Internal server error.' });
+            }
+
+            return res.status(201).json({ message: 'User created successfully.' });
+        });
+    });
+});
 //Displaying the supplier table
 
 app.get('/api/suppliers', (req, res) => {
@@ -125,7 +190,7 @@ app.get('/api/getSupplier', (req, res) => {
     });
 });
 
-//  Register new product
+//  Register new supplier
 
 app.post('/suppliers/register', (req, res) => {
 
@@ -133,23 +198,24 @@ app.post('/suppliers/register', (req, res) => {
     const { supplierName, contactInfo, Address } = req.body;
 
     console.log(60);
-
+    if (!supplierName || !contactInfo || !Address) {
+        return res.status(400).json({ message: 'all fields are required' });
+    }
 
     // inserting into supplier table
 
-    const checkSupplierExists = 'Select * FROM suppliers WHERE SupplierName = ? AND ContactInfo = ? AND Address = ?';
+    const checkSupplierExists = 'Select * FROM suppliers WHERE ContactInfo = ?';
 
-    db.query(checkSupplierExists, [supplierName, contactInfo, Address], (err, result) => {
+    db.query(checkSupplierExists, [contactInfo], (err, result) => {
         console.log(65);
 
         if (err) {
-            console.error('Error inserting new product: ' + err);
             return res.status(500).json({ error: 'Internal server error' });
 
         }
 
         if (result.length > 0) {
-            res.status(400).json({ message: 'Supplier already registered' });
+            return res.status(409).json({ message: 'This contact number already exists' });
         }
 
         else {
@@ -167,11 +233,12 @@ app.post('/suppliers/register', (req, res) => {
 
                 }
 
-                res.status(201).json({ message: 'Supplier registered successfully' });
+                return res.status(201).json({ message: 'Supplier registered successfully' });
             });
         }
 
     });
+
 
 });
 

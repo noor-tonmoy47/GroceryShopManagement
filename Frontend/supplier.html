@@ -19,17 +19,23 @@
       <h3>Add Supplier</h3>
       <div class="row">
         <div class="col">
-          <input type="text" class="form-control Supplier" placeholder="Supplier Name" name="SupplierName">
+          <input type="text" class="form-control Supplier" id="name" placeholder="SupplierName" name="SupplierName"
+            required="true" autocomplete="off">
         </div>
         <div class="col">
-          <input type="tel" class="form-control Supplier" placeholder="Contact Info" name="ContactInfo">
+          <!-- <input type="tel" class="form-control Supplier" id="contact" placeholder="Contact Info" name="ContactInfo"
+            pattern="\d+" title="please enter digits only" required="true" autocomplete="off"> -->
+          <input type="tel" class="form-control Supplier" id="contact" placeholder="Contact Info" name="ContactInfo"
+            required="true" autocomplete="off">
+          <span id="contact-error" style="color: red;"></span>
         </div>
         <div class="col">
-          <input type="text" class="form-control Supplier" placeholder="Address" name="Address">
+          <input type="text" class="form-control Supplier" id="address" placeholder="Address" name="Address"
+            required="true" autocomplete="off">
         </div>
         <div class="col">
-          <input type="submit" value="Add" class="form-control btnSupplier" placeholder="Register"
-            name="btnAddSupplier">
+          <input type="button" onclick="addSupplier()" value="Add" class="form-control btnSupplier" id="submitbtn"
+            placeholder="Register" name="btnAddSupplier">
         </div>
       </div>
     </form>
@@ -52,32 +58,92 @@
     </table>
   </div>
   <script>
-    fetch('http://localhost:3000/api/suppliers', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }) // Replace with your actual API endpoint
-      .then(response => response.json())
-      .then(data => {
-        const supplierTable = document.getElementById('supplierTable');
-        const tbody = supplierTable.querySelector('tbody');
+    function validateContact(input) {
+      const isValid = /^\d+$/.test(input);
+      return isValid;
+    }
 
-        data.forEach(supplier => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${supplier.SupplierID}</td>
-            <td>${supplier.SupplierName}</td>
-            <td>${supplier.ContactInfo}</td>
-            <td>${supplier.Address}</td>
-          `;
-          tbody.appendChild(row);
+    function addSupplier() {
 
-        });
+      const name = document.getElementById("name").value;
+      const contact = document.getElementById('contact').value;
+      const address = document.getElementById('address').value;
+
+      console.log(contact);
+
+      const errorElement = document.getElementById('contact-error');
+
+      if (!validateContact(contact)) {
+
+        errorElement.textContent = 'Please enter digits only';
+        return;
+      }
+      else {
+
+        errorElement.textContent = '';
+      }
+
+      //POST request to the supplier register endpoint
+      try {
+        fetch('http://localhost:3000/suppliers/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ supplierName: name, contactInfo: contact, Address: address })
+        })
+          .then(response => response.json())
+
+          .then(result => {
+            const mess = `Supplier registered successfully`;
+
+            alert(result.message);
+
+            if (mess === result.message) {
+              fetchSuppliers();
+            }
+
+          }).catch(error => {
+            // console.error('Error:', error);
+          });
+      } catch (error) {
+        console.error(error.message);
+      }
+
+    }
+
+    function fetchSuppliers() {
+
+      fetch('http://localhost:3000/api/suppliers', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
       })
-      .catch(error => {
-        console.error('Error fetching data: ' + error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          const supplierTable = document.getElementById('supplierTable');
+          const tbody = supplierTable.querySelector('tbody');
+
+          data.forEach(supplier => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+          <td>${supplier.SupplierID}</td>
+          <td>${supplier.SupplierName}</td>
+          <td>${supplier.ContactInfo}</td>
+          <td>${supplier.Address}</td>
+          `;
+            tbody.appendChild(row);
+
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching data: ' + error);
+        });
+    }
+
+    fetchSuppliers();
+
   </script>
 </body>
 
