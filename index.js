@@ -326,7 +326,7 @@ app.post('/products', (req, res) => {
 
 
 
-    const { name, supplierName, category, price, quantity, expiryDate } = req.body;
+    const { name, category, supplierName, expiryDate, quantity, price } = req.body;
 
 
     //Does Product Exists???
@@ -348,42 +348,8 @@ app.post('/products', (req, res) => {
 
             // Updating the current availability of the existing product
 
-            const pidQuery = 'SELECT ProductID FROM products WHERE Name = ?';
 
-            db.query(pidQuery, [name], (err, result) => {
-
-                if (err) {
-                    console.log(25);
-
-
-                    console.error('An Error occured: ' + err);
-                    res.status(500).json({ error: 'Internal server error' });
-                    return;
-                }
-
-                const addQuery = 'Update warehouse SET Current_Availability = Current_Availability + ? WHERE ProductID = ?';
-
-                db.query(addQuery, [quantity, result[0].ProductID], (err, result) => {
-                    if (err) {
-                        console.log(30);
-
-                        console.error('Could not update the warehouse' + err);
-                        res.status(500).json({ error: 'Internal server error' });
-                        return;
-                    }
-
-                });
-
-
-
-            });
-
-
-            return res.status(201).json({ message: "Warehouse updated successfully" });
-            //res.status(400).json({ message: 'Product already exists' });
-
-
-
+            return res.status(401).json({ message: "This Product already exists" });
         }
 
         else {
