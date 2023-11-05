@@ -1,6 +1,10 @@
 /* Basic styling for the navigation bar */
 body {
-    background-image: url(doodle_food_pattern.jpg);
+    /* background-image: url(doodle_food_pattern.jpg); */
+    /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
+    font-family: 'Catamaran', sans-serif;
+    background-color: rgba(169, 185, 187, 0.511);
+    /* 005163  */
     background-size: cover;
 }
 
@@ -16,7 +20,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #274a55;
+    background-color: #005163;
     padding-top: 20px;
 }
 
@@ -29,17 +33,28 @@ body {
 }
 
 #navbar a {
-    padding: 22px 35px;
-
+    padding: 22px 20px;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    /* padding-bottom: px; */
+    font-weight: 600;
+    /* text-align: center; */
+    /* text-decoration: #005163; */
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px;
     color: #fff;
     display: block;
+    /* text-shadow: #00516315; */
+
 }
 
 /* Change button color on hover */
+
+
 #navbar a:hover {
-    background-color: #091118;
+    background-color: #24243e6c;
+    border-radius: 20px;
+
 }
 
 .contentArea {
@@ -62,18 +77,19 @@ body {
 
 h3 {
 
-    font-size: 25px;
+    font-size: 28px;
     text-align: center;
     font-weight: bold;
     /* margin: auto; */
-    padding: auto;
-    margin-top: 15px;
+    padding: 6px;
+    margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 750px;
-    background-color: #2C5F2D;
-    color: #ffffff;
+    background-color: #00516315;
+    color: #005163;
+    border: 1px solid #005163;
     width: 300px;
-    border-radius: 5px;
+    border-radius: 30px 0px 30px 0px;
 }
 
 /* Style the table */
@@ -89,11 +105,13 @@ table {
 
 /* Style the table headers */
 th {
-    background-color: #2C5F2D;
+    background-color: #005163;
     color: #fff;
     text-align: left;
     padding: 10px;
     margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 td,
@@ -101,14 +119,15 @@ th {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
+    font-size: 18px;
 }
 
 tr:nth-child(odd) {
-    background-color: whitesmoke;
+    background-color: rgba(220, 220, 220, 0.562);
 }
 
 tr:nth-child(even) {
-    background-color: gainsboro;
+    background-color: rgba(113, 106, 106, 0.203);
 }
 
 /* Style the table rows */

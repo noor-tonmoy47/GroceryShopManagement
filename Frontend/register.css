@@ -1,5 +1,6 @@
 body {
-    background-image: url(doodle_food_pattern.jpg);
+    font-family: 'Catamaran', sans-serif;
+    background-color: rgba(169, 185, 187, 0.42);
     background-size: cover;
 }
 
@@ -14,12 +15,12 @@ body {
     height: 30px;
     font-size: 20px;
     font-weight: bold;
-    color: rgb(25, 86, 121);
+    color: #005163;
     text-align: center;
     font-family: Verdana, sans-serif;
     border-radius: 5px;
     /* border-color: rgb(38, 113, 78); */
-    border: 1px solid rgb(24, 134, 44);
+    border: 1px solid #005163;
     /* border-color: black; */
 }
 
@@ -39,22 +40,27 @@ option {
     height: 35px;
     border: 1px solid #fff;
     border-radius: 5px;
-    background: #2C5F2D;
+    background: #005163;
     color: #fff;
     margin-left: 40px;
 }
 
-h2 {
+h3 {
+    font-size: 28px;
+
     text-align: center;
     font-weight: bold;
     margin: auto;
-    padding: auto;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    background-color: #2C5F2D;
-    color: #ffffff;
+    padding: 6px;
+    margin-top: 25px;
+    margin-bottom: 35px;
+    background-color: #00516315;
+    color: #005163;
+    border: 1px solid #005163;
+    /* background-color: #2C5F2D;
+    color: #ffffff; */
     width: 300px;
-    border-radius: 5px;
+    border-radius: 30px 0px 30px 0px;
 }
 
 table {
@@ -65,8 +71,8 @@ table {
     margin-bottom: 30px;
 }
 
-thead th {
-    background-color: #2C5F2D;
+th {
+    background-color: #005163;
     font-family: Open Sans;
     font-size: 18px;
     color: #ffffff;
@@ -77,12 +83,13 @@ th {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
+    font-size: 18px;
 }
 
 tr:nth-child(odd) {
-    background-color: whitesmoke;
+    background-color: rgba(220, 220, 220, 0.562);
 }
 
 tr:nth-child(even) {
-    background-color: gainsboro;
+    background-color: rgba(113, 106, 106, 0.203);
 }
