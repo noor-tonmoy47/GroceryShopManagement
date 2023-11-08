@@ -15,12 +15,12 @@
 
   <div class="container">
     <h3 id="headline">Product Purchase</h3>
-    <select name="Category" id="Category">
-      <option value="hidden" style="display: none;"> Category</option>
+    <select name="Category" id="Category" onchange="categorySelected()">
+      <option value="" style="display: none;"> Category</option>
     </select>
 
-    <select name="Product" id="Product">
-      <option value="hidden" style="display: none;"> Product</option>
+    <select name="Product" id="Product" onchange="productSelected()">
+      <option value="" style="display: none;"> Product</option>
     </select>
 
     <input type="number" id="QuanInput" placeholder="Quantity" name="Quantity" min="0">
@@ -28,7 +28,7 @@
     <label for="myText">UnitPrice: </label>
     <input type="text" id="myText" name="myText" readonly>
 
-    <button id="addbtn"> Add </button>
+    <button id="addbtn" onclick="btnSubmit()"> Add </button>
   </div>
 
   <div class="w3-container">
@@ -44,47 +44,84 @@
         </tr>
       </thead>
       <tbody>
-
+        <td colspan="2"></td>
+        <td style="font-weight : bold;">Total Payable:</td>
+        <td id="total"></td>
       </tbody>
     </table>
   </div>
 
   <div id="info">
-    <button id="pdf"> Generate Receipt </button>
+    <button id="pdf" onclick="generateReceipt()"> Generate Receipt </button>
+    <button id="checkout"> checkout </button>
   </div>
-  <script>
-    fetch('http://localhost:3000/api/suppliers', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }) // Replace with your actual API endpoint
-      .then(response => response.json())
-      .then(data => {
-        const invoiceTable = document.getElementById('invoice');
-        const tbody = invoiceTable.querySelector('tbody');
+  <script src="invoice.js"></script>
+  <!-- <script>
 
-        data.forEach(supplier => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${supplier.SupplierID}</td>
-            <td>${supplier.SupplierName}</td>
-            <td>${supplier.ContactInfo}</td>
-            <td>${supplier.Address}</td>
-          `;
-          tbody.appendChild(row);
+    // let transactionID = 7002;
 
+
+    const filename = 'table-data.pdf';
+
+    function tableToJson(tableId) {
+      const table = document.getElementById("invoice");
+      const headers = [...table.querySelectorAll('thead th')];
+      const rows = [...table.querySelectorAll('tbody tr')];
+
+      const jsonData = rows.map(row => {
+        const rowData = {};
+        headers.forEach((header, index) => {
+          rowData[header.textContent] = row.querySelectorAll('td')[index].textContent;
         });
-        const row = document.createElement('tr');
-        row.innerHTML = `<td colspan="2"></td>
-                      <td style ="font-weight : bold;">Total Payable:</td>
-                        <td id = "total"></td>`;
-        tbody.appendChild(row);
-      })
-      .catch(error => {
-        console.error('Error fetching data: ' + error);
+        return rowData;
       });
-  </script>
+
+      return JSON.stringify(jsonData, null, 2);
+    }
+
+
+    function generateReceipt() {
+      const PDFDocument = require('pdfkit');
+      const fs = require('fs');
+      const doc = new PDFDocument();
+      const invoiceJson = tableToJson("myTable");
+      // console.log(json);
+
+      // Create a PDF document
+
+      // Pipe the PDF content to a writable stream (a file in this case)
+      doc.pipe(fs.createWriteStream(filename));
+
+      // Define table headers
+      const headers = ["ProductName", "Quantity", "UnitPrice", "Total"];
+
+      // Add table headers
+      headers.forEach(header => {
+        doc.fontSize(12).text(header, { continued: true });
+        doc.moveUp();
+        doc.text("______________", { continued: true });
+      });
+
+      doc.moveDown();
+
+      // Loop through and add table data
+      invoiceJson.forEach(row => {
+        headers.forEach(header => {
+          doc.fontSize(12).text(row[header], { continued: true });
+        });
+        doc.moveDown();
+      });
+
+      // Finalize and close the PDF document
+      doc.end();
+
+
+
+      transactionID++;
+    }
+
+  </script> -->
+
 </body>
 
 </html>

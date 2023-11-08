@@ -1,6 +1,6 @@
 .container {
     font-style: normal;
-    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Catamaran', sans-serif;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
@@ -86,7 +86,8 @@ label {
 }
 
 #addbtn,
-#pdf {
+#pdf,
+#checkout {
     font-size: 16px;
     font-weight: bold;
     width: 100px;
@@ -105,6 +106,13 @@ label {
     height: 40px;
     margin-left: 100px;
     /* margin-right: 530px; */
+}
+
+#checkout {
+    font-size: 23px;
+    width: 250px;
+    height: 40px;
+    margin-left: 700px;
 }
 
 select {

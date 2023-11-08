@@ -209,7 +209,21 @@ app.get('/api/getCategory', (req, res) => {
     });
 });
 
+// Getting the unit price of a product
+app.post('/api/getUnitPrice', (req, res) => {
+    const { name } = req.body;
 
+    const query = 'SELECT Price FROM products WHERE  Name = ?';
+
+    db.query(query, [name], (err, results) => {
+        if (err) {
+            console.error('Error executing the query: ' + err.stack);
+            return res.status(500).send('Error retrieving data from the database.');
+        }
+
+        res.json(results);
+    })
+})
 //Getting all the supplier names
 
 app.get('/api/getSupplier', (req, res) => {
@@ -448,6 +462,108 @@ app.post('/products', (req, res) => {
 
 });
 
+
+app.post('/api/invoice', (req, res) => {
+
+    let ProductID;
+    const { trID, name, quantity } = req.body;
+
+    // check if warehouse has the requested amount or not
+
+    const sqlQueryPID = 'SELECT ProductID FROM products WHERE Name = ?';
+
+    db.query(sqlQueryPID, [name], (err, results) => {
+        if (err) {
+
+            return res.status(500).json({ error: 'innie' });
+
+        }
+
+
+        ProductID = results[0].ProductID;
+
+        const sqlQueryQuan = 'SELECT Current_Availability FROM warehouse WHERE ProductID = ?';
+
+        db.query(sqlQueryQuan, [results[0].ProductID], (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: 'minnie' });
+
+            }
+            // console.log(results[0].Current_Availability);
+
+            // console.log(quantity);
+
+            if (quantity <= results[0].Current_Availability) {
+
+                const checksql = 'SELECT * FROM sales WHERE TransactionID = ?';
+                db.query(checksql, [trID], (err, results) => {
+                    if (err) {
+                        return res.status(500).json({ error: 'boom' });
+
+                    }
+
+                    if (results.length === 0) {
+                        const insertInSales = 'INSERT INTO sales(TransactionID) VALUES (?)';
+                        db.query(insertInSales, [trID], (err, results) => {
+                            if (err) {
+                                return res.status(500).json({ error: 'miney' });
+
+                            }
+                        });
+
+                    }
+
+                    console.log(56);
+                    const invoiceQuery = 'INSERT INTO transactiondetails(TransactionID, ProductID, Quantity) VALUES (?, ?, ?)';
+
+                    db.query(invoiceQuery, [trID, ProductID, quantity], (err, results) => {
+                        if (err) {
+                            return res.status(500).json({ error: 'moe' });
+
+                        }
+                        return res.status(201).json({ message: "Invoice updated" });
+                    });
+
+                });
+
+                // res.json();
+
+
+
+            }
+
+            else {
+                return res.status(400).json({ message: "We don't have the selected product in pur warehouse in given quantity" });
+            }
+        });
+
+
+    });
+
+});
+
+app.post('/api/sales', (req, res) => {
+
+    const { trID, amount } = req.body;
+
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    // This arrangement can be altered based on how we want the date's format to appear.
+    let currentDate = `${year}-${month}-${day}`;
+    // console.log(currentDate); // "17-6-2022"
+    const salesQuery = 'UPDATE sales SET TransactionDate = ?, Amount = ? WHERE TransactionID = ?';
+    db.query(salesQuery, [currentDate, amount, trID], (err, results) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+    });
+
+});
 //  Calculate sales and update sales records
 
 // app.post('/sales', (req, res) => {
