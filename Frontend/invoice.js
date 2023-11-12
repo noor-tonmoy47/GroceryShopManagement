@@ -1,7 +1,7 @@
 
-let transactionDetailsID = 5001;
-let transactionID = 7002;
+let uniqueNumber = 0;
 
+let buttonAddCount = 0;
 
 function gettingInfo(prValue, quanValue, price) {
 
@@ -152,6 +152,11 @@ function productSelected() {
 }
 
 function btnSubmit() {
+
+    if (buttonAddCount === 0) {
+        generateID();
+        buttonAddCount++;
+    }
     const quanValue = document.getElementById('QuanInput').value;
     const productDropDownValue = document.getElementById("Product").value;
 
@@ -165,14 +170,14 @@ function btnSubmit() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ trID: transactionID, name: productDropDownValue, quantity: quanValue })
+        body: JSON.stringify({ trID: uniqueNumber, name: productDropDownValue, quantity: quanValue })
     })
         .then(response => response.json())
 
         .then(result => {
             const mess = `Invoice updated`;
 
-            alert(result.message);
+            // alert(result.message);
 
             if (mess === result.message) {
 
@@ -190,5 +195,40 @@ function btnSubmit() {
     // } catch (error) {
     //     console.log(error.message);
     // }
+
+}
+
+function generateID() {
+
+    uniqueNumber = Date.now() % 1000000000;
+}
+function checkOut() {
+    // const uniqueTimestamp = Date.now() + Math.floor(Math.random() * 1000);
+    const totalAmount = document.getElementById('total').innerText;
+    console.log(totalAmount);
+
+    if (uniqueNumber === 0) {
+        alert(`You haven't selected any item`);
+        return;
+    }
+    fetch(`http://localhost:3000/api/sales/${uniqueNumber}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            amount: totalAmount
+        })
+    })
+        .then(response => response.json())
+
+        .then(result => console.log(result.message))
+
+        .catch(error => console.log(error.message))
+
+    // transactionID++;
+    buttonAddCount = 0;
+    uniqueNumber = 0;
+    window.location.href = '../Frontend/home.html';
 
 }

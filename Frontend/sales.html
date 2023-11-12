@@ -11,7 +11,7 @@
   <div class="w3-container">
     <h3 class="short">Sales Record</h3>
 
-    <table>
+    <table id="salesTable">
       <thead>
         <tr>
           <th>Transaction ID</th>
@@ -24,7 +24,42 @@
       </tbody>
     </table>
   </div>
+  <script>
+    fetch('http://localhost:3000/api/salesTable', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        const salesTable = document.getElementById('salesTable');
+        const tbody = salesTable.querySelector('tbody');
 
+        data.forEach(sales => {
+          const dateTimeString = sales.TransactionDate;
+          let dateOnly;
+          if (dateTimeString !== null) {
+
+            dateOnly = new Date(dateTimeString).toISOString().split('T')[0];
+          }
+          else {
+            dateOnly = dateTimeString;
+          }
+          const row = document.createElement('tr');
+          row.innerHTML = `
+          <td>${sales.TransactionID}</td>
+          <td>${dateOnly}</td>
+          <td>${sales.Amount}</td>
+          `;
+          tbody.appendChild(row);
+
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data: ' + error);
+      });
+  </script>
 </body>
 
 </html>

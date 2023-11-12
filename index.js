@@ -94,6 +94,21 @@ app.post('/api/signup', (req, res) => {
         });
     });
 });
+
+
+//Displaying the sales table
+app.get('/api/salesTable', (req, res) => {
+    const sql = 'SELECT * FROM sales';
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error executing the query: ' + err.stack);
+            return res.status(500).send('Error retrieving data from the database.');
+        }
+
+        res.json(results);
+    });
+});
 //Displaying the supplier table
 
 app.get('/api/suppliers', (req, res) => {
@@ -542,9 +557,11 @@ app.post('/api/invoice', (req, res) => {
 
 });
 
-app.post('/api/sales', (req, res) => {
+app.post('/api/sales/:trId', (req, res) => {
 
-    const { trID, amount } = req.body;
+    const trID = req.params.trId;
+
+    const { amount } = req.body;
 
     const date = new Date();
 
