@@ -80,6 +80,13 @@
 
 
 				</div><!--End InvoiceBot-->
+				<button id="btnPrint" class="hidden-print">Print</button>
+				<script>
+					const $btnPrint = document.querySelector("#btnPrint");
+					$btnPrint.addEventListener("click", () => {
+						window.print();
+					});
+				</script>
   </div><!--End Invoice-->
 </body>
 </html>

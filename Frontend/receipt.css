@@ -71,5 +71,12 @@
   }
   .item{width: 24mm;}
   .itemtext{font-size: .5em;}
+
+  @media print {
+    .hidden-print,
+    .hidden-print * {
+        display: none !important;
+    }
+}
     
 }
