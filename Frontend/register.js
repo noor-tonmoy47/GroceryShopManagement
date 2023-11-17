@@ -42,7 +42,7 @@ function getProducts() {
 }
 
 function isAlphabet(input) {
-    const alphabetRegex = /^[A-Za-z]+$/;
+    const alphabetRegex = /^[A-Za-z ]+$/;
     return alphabetRegex.test(input);
 }
 getProducts();

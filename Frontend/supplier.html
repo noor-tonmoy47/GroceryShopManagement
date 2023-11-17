@@ -63,8 +63,13 @@
     }
 
     function isAlphabet(input) {
-      const alphabetRegex = /^[A-Za-z]+$/;
+      const alphabetRegex = /^[A-Za-z ]+$/;
       return alphabetRegex.test(input);
+    }
+
+    function isAddressValid(input) {
+      const addressRegEx = /^[A-Za-z, ]+$/;
+      return addressRegEx.test(input);
     }
 
     function addSupplier(e) {
@@ -78,7 +83,7 @@
 
       if (!isAlphabet(name)) {
 
-        alert('Supplier Name must contain only alphabets');
+        alert('Supplier Name must contain only alphabets and spaces');
         formError = true;
       }
 
@@ -87,8 +92,8 @@
         formError = true;
       }
 
-      else if (!isAlphabet(address)) {
-        alert('Address must contain only alphabets');
+      else if (!isAddressValid(address)) {
+        alert('Address must not contain any digits');
         formError = true;
       }
 
