@@ -81,7 +81,7 @@ fetch('http://localhost:3000/api/getCategory', {
     headers: {
         'Content-Type': 'application/json'
     },
-}) // Replace with your actual API endpoint
+})
     .then(response => response.json())
     .then(data => {
         const categorySelect = document.getElementById('Category');
