@@ -53,7 +53,7 @@ fetch('http://localhost:3000/api/getSupplier', {
     headers: {
         'Content-Type': 'application/json'
     },
-}) // Replace with your actual API endpoint
+})
     .then(response => response.json())
     .then(data => {
         const SupplierSelect = document.getElementById('SupplierName');
