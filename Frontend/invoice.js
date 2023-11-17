@@ -269,6 +269,31 @@ function convertTableToJson() {
 
 function generateReceipt() {
 
+    const totalAmount = document.getElementById('total').innerText;
+    console.log(totalAmount);
+
+    if (uniqueNumber === 0) {
+        alert(`You haven't selected any item`);
+        return;
+    }
+    fetch(`http://localhost:3000/api/sales/${uniqueNumber}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            amount: totalAmount
+        })
+    })
+        .then(response => response.json())
+
+        .then(result => console.log(result.message))
+
+        .catch(error => console.log(error.message))
+
+    // transactionID++;
+    buttonAddCount = 0;
+    uniqueNumber = 0;
 
     convertTableToJson();
 
