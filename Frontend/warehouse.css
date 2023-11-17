@@ -6,9 +6,15 @@
     color: #ffffff;
 
     position: relative;
+<<<<<<< HEAD
+    /* left: 70px; */
+    top: 50px;
+    /* width: 100px; */
+=======
 
     top: 30px;
 
+>>>>>>> main
     height: 50px;
     margin-left: 35px;
     margin-right: 35px;
@@ -16,13 +22,16 @@
 
 }
 
+#warehouseTable{
+    margin-left: 400px;
+}
 #Category {
     position: absolute;
     color: #005163;
     text-align: center;
     border: 1px solid #005163;
     left: 150px;
-    margin-right: 90px;
+    margin-left: 220px;
     height: 40px;
 }
 
@@ -32,27 +41,31 @@
     text-align: center;
     border: 1px solid #005163;
     left: 380px;
-    margin-left: 90px;
+    margin-left: 215px;
     margin-right: 70px;
 }
 
 
 
 #numberInput {
-    width: 200px;
-    height: 30px;
+    width: 150px;
+    height: 40px;
     border-radius: 5px;
     border: 1px solid #005163;
     background: #fff;
     text-align: center;
     color: #005163;
 
+<<<<<<< HEAD
+    /* margin-top: 10px; */
+    margin-left: 45px;
+=======
 
     margin-left: 30px;
+>>>>>>> main
     margin-right: 30px;
     position: absolute;
     left: 780px;
-    top: 5px;
 }
 
 
@@ -60,15 +73,14 @@
 #buttonInput {
     font-size: 16px;
     font-weight: bold;
-    width: 100px;
-    height: 30px;
+    width: 125px;
+    height: 40px;
     border: 1px solid #005163;
     border-radius: 5px;
     background: #005163;
     color: #fff;
     position: absolute;
-    left: 1120px;
-    top: 5px;
+    left: 1000px;
 }
 
 

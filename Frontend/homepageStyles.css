@@ -87,7 +87,7 @@ h3 {
     padding: 6px;
     margin-top: 25px;
     margin-bottom: 25px;
-    margin-left: 750px;
+    margin-left: 680px;
     background-color: #00516315;
     color: #005163;
     border: 1px solid #005163;
@@ -101,7 +101,7 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     /* margin: auto; */
-    margin-left: 400px;
+    margin-left: 250px;
     /* align-content: center; */
     margin-bottom: 30px;
 }

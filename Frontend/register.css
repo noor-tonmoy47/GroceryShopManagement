@@ -13,7 +13,7 @@ body {
 .Register {
     width: 200px;
     height: 30px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     color: #005163;
     text-align: center;
@@ -24,6 +24,20 @@ body {
     /* border-color: black; */
 }
 
+#ProductName{
+    margin-left: 212px;
+}
+
+#ExpiryDate{
+    width: 150px;
+}
+#numberInput{
+    width: 150px;
+}
+
+#UnitPrice{
+    width: 150px;
+}
 .Register::placeholder {
     color: rgb(25, 86, 121);
 }
@@ -42,7 +56,7 @@ option {
     border-radius: 5px;
     background: #005163;
     color: #fff;
-    margin-left: 40px;
+    margin-left: 10px;
 }
 
 h3 {

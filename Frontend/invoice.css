@@ -12,7 +12,7 @@
     /* top: 48px; */
     /* width: 100px; */
     /* height: 50px; */
-    margin-left: 35px;
+    margin-left: 182px;
     margin-right: 35px;
     margin-bottom: 40px;
 
@@ -29,19 +29,30 @@
     margin-bottom: 30px;
 }
 
-table {
+#invoice{
     margin-bottom: 90px;
+    margin-left: 400px;
 }
 
 #headline {
     /* margin-top: 20px; */
     /* padding-bottom: 20px; */
     margin-bottom: 40px;
+    width: 250px;
+    margin-left: 520px;
+}
+#Category{
+    border-radius: 5px;
+    border-color: #000;
 }
 
+#Product{
+    border-radius: 5px;
+    border-color: #000;
+}
 #QuanInput {
-    width: 200px;
-    height: 30px;
+    width: 125px;
+    height: 35px;
     border-radius: 5px;
     border: 1px solid #000;
     background: #fff;
@@ -57,7 +68,6 @@ table {
 
 #QuanInput::placeholder {
     color: #000;
-
 }
 
 label {
@@ -80,51 +90,53 @@ label {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100px;
-    height: 30px;
+    border-color: black;
+    width: 125px;
+    height: 35px;
     text-align: center;
 }
-
+::placeholder{
+    color:#000;
+}
 #addbtn,
 #pdf,
 #checkout {
     font-size: 16px;
     font-weight: bold;
-    width: 100px;
-    height: 30px;
+    width: 115px;
+    height: 40px;
     border: 1px solid #fff;
     border-radius: 5px;
     background: #005163;
     color: #fff;
-    margin-left: 30px;
+    margin-left: 40px;
 
 }
 
 #pdf {
-    font-size: 23px;
+    font-size: 20px;
     width: 250px;
     height: 40px;
-    margin-left: 100px;
+    margin-left: 398px;
     /* margin-right: 530px; */
 }
 
 #checkout {
-    font-size: 23px;
-    width: 250px;
+    font-size: 20px;
+    width: 175px;
     height: 40px;
-    margin-left: 700px;
+    margin-left: 485px;
 }
 
-select {
+select{
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 200px;
+    width: 175px;
     height: 40px;
     /* margin: 40px; */
     margin-left: 40px;
-    margin-right: 40px;
 }
 
 /* Style the options in the dropdown */
