@@ -5,7 +5,7 @@
 	<title>Login/SignUp</title>
 	<link rel="stylesheet" type="text/css" href="login.css">
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-	<link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
+	<link rel="icon" href="/Logo.png" type="image/icon type">
 
 </head>
 
@@ -14,25 +14,31 @@
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 		<div class="signup">
-			<form>
+			<form id='signUpForm'>
 				<label for="chk" aria-hidden="true">Sign Up</label>
-				<input type="text" name="txt" placeholder="User name" required="">
-				<input type="email" name="email" placeholder="Email" required=""
-					pattern="^[a-zA-Z0-9.+_-]+@[a-zA-Z]{2,}$">
-				<input type=" password" name="pswd" placeholder="Password" required="">
-				<button>Submit</button>
+				<input type="text" id="usernameReg" name="txt" placeholder="User name" pattern="[a-zA-Z]+" required
+					autocomplete="off">
+				<input type="email" id="useremailReg" name="email" placeholder="Email" required
+					pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" autocomplete="off">
+				<input type="password" id="passReg" name="pswd" placeholder="Password" required autocomplete="off">
+				<input type="password" id="RePassReg" name="Repswd" placeholder="Confirm your password" required
+					autocomplete="off">
+				<button id="signupBtn">Submit</button>
 			</form>
 		</div>
 
 		<div class="login">
 			<form>
 				<label for="chk" aria-hidden="true">Login</label>
-				<input type="email" name="email" placeholder="Email" required="">
-				<input type="password" name="pswd" placeholder="Password" required="">
-				<a href="home.html"><button>Submit</button></a>
+				<input type="text" id="loginUser" name="user" placeholder="UserName" required autocomplete="off">
+				<input type="password" id="loginPassword" name="pswd" placeholder="Password" required
+					autocomplete="off">
+				<button id='loginBtn'>Submit</button>
 			</form>
 		</div>
 	</div>
+
+	<script src="login.js"></script>
 </body>
 
 </html>

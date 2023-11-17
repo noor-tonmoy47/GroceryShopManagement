@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 const cors = require('cors');
 const app = express();
@@ -9,6 +11,8 @@ const PORT = 3000;
 app.use(bodyParser.json());
 
 app.use(cors());
+
+app.use(express.static('Frontend'));
 
 
 //Creating a MySQL connection
@@ -27,7 +31,42 @@ db.connect((err) => {
     console.log('Connected to MySQL as id ' + db.threadId);
 });
 
+//Secret Key for login
+const secretKey = 'Akhalia';
 
+app.get('/', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Frontend', 'login.html'));
+});
+app.get('/home', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Frontend', 'home.html'));
+});
+app.get('/supplier', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Frontend', 'supplier.html'));
+});
+app.get('/register', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Frontend', 'regiter.html'));
+});
+app.get('/warehouse', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Frontend', 'warehouse.html'));
+});
+app.get('/invoice', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Frontend', 'invoice.html'));
+});
+
+app.get('/receipt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Frontend', 'receipt.html'));
+});
+
+app.get('/sales', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Frontend', 'sales.html'));
+});
 //Login 
 app.post('/api/login', (req, res) => {
     console.log("1")
@@ -41,7 +80,7 @@ app.post('/api/login', (req, res) => {
     console.log("1")
 
     // Checking if the user exists in the database
-    const sql = 'SELECT * FROM users WHERE User_Name = ? AND User_Password = ?';
+    const sql = 'SELECT * FROM admininfo WHERE User_Name = ? AND User_Password = ?';
     db.query(sql, [username, password], (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Internal server error.' });
@@ -351,7 +390,7 @@ app.post('/categories', (req, res) => {
 
 
 
-app.post('/products', (req, res) => {
+app.post('/products/register', (req, res) => {
 
 
 
@@ -581,139 +620,6 @@ app.post('/api/sales/:trId', (req, res) => {
     });
 
 });
-//  Calculate sales and update sales records
-
-// app.post('/sales', (req, res) => {
-//     const { productName, quantity } = req.body;
-
-//     // Calculate total payable amount
-//     let totalAmount = 0;
-//     let curr = 0;
-
-//     let productID = 0;
-
-//     let unitPrice = 0;
-
-
-
-//     // check if the product is registered or not
-//     const productQuery = 'Select ProductID from products where Name = ?';
-
-//     db.query(productQuery, [productName], (err, result) => {
-//         if (err) {
-//             return res.status(500).json({ message: 'Internal Server Error' });
-//         }
-
-
-//         if (result.length > 0) {
-//             //return true;
-//             productID = result[0].ProductID;
-
-//             console.log(productID);
-
-//             const quantityQuery = 'Select Current_Availability from warehouse where ProductID = ?';
-
-//             db.query(quantityQuery, [productID], (err, result) => {
-//                 if (err) {
-//                     return res.status(500).json({ message: 'Internal Server Error' });
-//                 }
-
-
-//                 curr = result[0].Current_Availability;
-
-//                 console.log(curr);
-
-//                 // if (result.length > 0) {
-//                 // }
-//             });
-//             //res.status(200).json({message: ""})
-//             if (curr < quantity) {
-//                 return res.status(301).json({ message: 'invalid input' });
-//             }
-
-//             else {
-//                 const getUnitPriceQuery = 'SELECT Price FROM products WHERE Name = ?';
-
-//                 db.query(getUnitPriceQuery, [productName], (err, result) => {
-//                     if (err) {
-//                         return res.status(500).json({ message: 'Internal Server Error' });
-//                     }
-
-//                     unitPrice = result[0].Price;
-//                     console.log(unitPrice);
-//                 })
-
-//                 totalAmount = quantity * unitPrice;
-//             }
-
-//         }
-
-//         else {
-//             return res.status(401).json({ message: "Product not found" });
-//         }
-
-//         //checking if it is available or not
-
-//     });
-
-
-
-
-//     // Iterate through the products and calculate the total amount
-//     /*
-
-//     for (const product of products) {
-//         const { productId, quantity } = product;
-
-//         // Fetch product price from the database
-//         const getProductQuery = 'SELECT price FROM Products WHERE id = ?';
-//         db.query(getProductQuery, [productId], (err, result) => {
-//             if (err) {
-//                 console.error('Error fetching product price: ' + err);
-//                 res.status(500).json({ error: 'Internal server error' });
-//                 return;
-//             }
-
-//             if (result.length === 0) {
-//                 res.status(404).json({ error: 'Product not found' });
-//                 return;
-//             }
-
-//             const productPrice = result[0].price;
-//             totalAmount += productPrice * quantity;
-
-//             // Check if the requested quantity is available
-//             // You should have a mechanism to track product stock and update it here
-//             // If there's not enough stock, you can send an appropriate response
-//             // and handle stock management accordingly.
-
-//             // Update the Sales and TransactionDetails tables
-//             const insertSalesQuery = 'INSERT INTO Sales (customerId, totalAmount) VALUES (?, ?)';
-//             db.query(insertSalesQuery, [customerId, totalAmount], (err, result) => {
-//                 if (err) {
-//                     console.error('Error inserting sales record: ' + err);
-//                     res.status(500).json({ error: 'Internal server error' });
-//                     return;
-//                 }
-
-//                 const salesId = result.insertId;
-
-//                 // Insert each product into TransactionDetails
-//                 const insertTransactionDetailsQuery = 'INSERT INTO TransactionDetails (salesId, productId, quantity) VALUES (?, ?, ?)';
-//                 db.query(insertTransactionDetailsQuery, [salesId, productId, quantity], (err) => {
-//                     if (err) {
-//                         console.error('Error inserting transaction details: ' + err);
-//                         res.status(500).json({ error: 'Internal server error' });
-//                         return;
-//                     }
-//                 });
-//             });
-//         });
-//     }
-//     */
-//     res.status(200).json({ message: 'Sales recorded successfully', totalAmount });
-// });
-
 
 
 app.listen(PORT, () => {

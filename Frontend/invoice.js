@@ -229,6 +229,47 @@ function checkOut() {
     // transactionID++;
     buttonAddCount = 0;
     uniqueNumber = 0;
-    window.location.href = '../Frontend/home.html';
+    window.location.href = 'home.html';
+
+}
+
+
+function convertTableToJson() {
+    // Get the table element
+    const table = document.getElementById('invoice');
+
+    // Get the table headers
+    const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent);
+
+    // Get the table rows
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+    // Convert rows to JSON
+    const jsonData = rows.map(row => {
+        const rowData = {};
+        Array.from(row.cells).forEach((cell, index) => {
+            rowData[headers[index]] = cell.textContent;
+        });
+        return rowData;
+    });
+
+    // Display the JSON data
+    console.log(jsonData);
+
+
+
+    // Convert JSON to a URL-friendly string
+    const jsonStr = encodeURIComponent(JSON.stringify(jsonData));
+
+    // Redirect to Page 2 with the JSON data as a query parameter
+
+    window.open(`receipt.html?data=${jsonStr}`, '_blank');
+
+}
+
+function generateReceipt() {
+
+
+    convertTableToJson();
 
 }

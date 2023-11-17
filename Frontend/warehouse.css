@@ -2,21 +2,24 @@
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-    /* background-color: #2C5F2D; */
+
     color: #ffffff;
 
     position: relative;
+<<<<<<< HEAD
     /* left: 70px; */
     top: 50px;
     /* width: 100px; */
+=======
+
+    top: 30px;
+
+>>>>>>> main
     height: 50px;
     margin-left: 35px;
     margin-right: 35px;
     margin-bottom: 70px;
-    /* border-radius: 5px;
-      margin-bottom: 20px;
-      margin-left: 170px;
-      margin-top: 40px; */
+
 }
 
 #warehouseTable{
@@ -53,8 +56,13 @@
     text-align: center;
     color: #005163;
 
+<<<<<<< HEAD
     /* margin-top: 10px; */
     margin-left: 45px;
+=======
+
+    margin-left: 30px;
+>>>>>>> main
     margin-right: 30px;
     position: absolute;
     left: 780px;
@@ -75,11 +83,9 @@
     left: 1000px;
 }
 
-/* Style the label */
 
 /* Style the select element (dropdown) */
 select {
-    /* padding: 10px; */
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;

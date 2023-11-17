@@ -6,12 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Grocery Management</title>
         <link rel="stylesheet" href="homepageStyles.css">
-        <link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
+        <link rel="icon" href="/Logo.png" type="image/icon type">
 
 </head>
 
 <body>
 
+<<<<<<< HEAD
        <div id="navbar">
                 <img id="logo" src="/Frontend/Logo.png" alt="Image of a shopping trolly" width="100px">
                 <div id="buttonField">
@@ -20,6 +21,16 @@
                         <a href="/Frontend/warehouse.html">Warehouse</a>
                         <a href="/Frontend/Invoice.html">Invoice</a>
                         <a href="/Frontend/sales.html">Sales</a>
+=======
+        <div id="navbar">
+                <img id="logo" src="/Logo.png" alt="Image of a shopping trolly" width="100px">
+                <div id="buttonField">
+                        <a href="/register">New Product</a>
+                        <a href="/supplier">Suppliers</a>
+                        <a href="/warehouse.html">Warehouse</a>
+                        <a href="/invoice.html">Invoice</a>
+                        <a href="/sales.html">Sales</a>
+>>>>>>> main
                 </div>
         </div> 
 
@@ -51,7 +62,7 @@
                         headers: {
                                 'Content-Type': 'application/json'
                         },
-                }) // Replace with your actual API endpoint
+                })
                         .then(response => response.json())
                         .then(data => {
                                 const productsTable = document.getElementById('productsTable');
@@ -68,7 +79,7 @@
                                         else {
                                                 dateOnly = dateTimeString;
                                         }
-                                        // console.log(dateOnly); // Output: "2024-06-12"
+
                                         const row = document.createElement('tr');
                                         row.innerHTML = `
                                                 <td>${products.ProductID}</td>
