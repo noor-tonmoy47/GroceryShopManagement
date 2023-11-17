@@ -8,12 +8,22 @@
   <link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="invoice.css">
+  <link rel="stylesheet" href="homepageStyles.css">
 </head>
 
 <body>
-
+  <div id="navbar">
+    <img id="logo" src="/Frontend/Logo.png" alt="Image of a shopping trolly" width="100px">
+    <div id="buttonField">
+            <a href="/Frontend/home.html">Home</a>
+            <a href="/Frontend/regiter.html">New Product</a>
+            <a href="/Frontend/supplier.html">Suppliers</a>
+            <a href="/Frontend/warehouse.html">Warehouse</a>
+            <a href="/Frontend/sales.html">Sales</a>
+    </div>
+  </div>
   <div class="container">
-    <h3 id="headline">Product Purchase</h3>
+    <h3 id="headline">Invoice</h3>
     <select name="Category" id="Category" onchange="categorySelected()">
       <option value="" style="display: none;"> Category</option>
     </select>
@@ -24,22 +34,22 @@
 
     <input type="number" id="QuanInput" placeholder="Quantity" name="Quantity" min="0">
 
-    <label for="myText">UnitPrice: </label>
-    <input type="text" id="myText" name="myText" readonly>
+    <!---<label for="myText">UnitPrice: </label>-->
+    <input type="text" id="myText" placeholder="UnitPrice" readonly>
 
     <button id="addbtn" onclick="btnSubmit()"> Add </button>
   </div>
 
   <div class="w3-container">
-    <h3 class="short" style="font-size: 23px;">Invoice</h3>
+    <!--<h3 class="short" style="font-size: 23px;">Invoice</h3>-->
 
-    <table id="invoice">
+    <table id="invoice" style="width: 60%;">
       <thead>
         <tr>
-          <th>Product Name</th>
-          <th>Quantity</th>
-          <th>Unit Price</th>
-          <th>Total</th>
+          <th style="width:40%;">Product Name</th>
+          <th style="width:20%;">Quantity</th>
+          <th style="width:20%;">Unit Price</th>
+          <th style="width:20%;">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -52,7 +62,7 @@
 
   <div id="info">
     <button id="pdf" onclick="generateReceipt()"> Generate Receipt </button>
-    <button id="checkout" onclick="checkOut()"> checkout </button>
+    <button id="checkout" onclick="checkOut()"> Checkout </button>
   </div>
   <script src="invoice.js"></script>
   <!-- <script>

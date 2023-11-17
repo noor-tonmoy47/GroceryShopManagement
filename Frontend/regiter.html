@@ -7,13 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
   <link rel="stylesheet" href="register.css">
+  <link rel="stylesheet" href="homepageStyles.css">
 
 </head>
 
 <body>
 
 
-
+  <div id="navbar">
+    <img id="logo" src="/Frontend/Logo.png" alt="Image of a shopping trolly" width="100px">
+    <div id="buttonField">
+            <a href="/Frontend/home.html">Home</a>
+            <a href="/Frontend/supplier.html">Suppliers</a>
+            <a href="/Frontend/warehouse.html">Warehouse</a>
+            <a href="/Frontend/Invoice.html">Invoice</a>
+            <a href="/Frontend/sales.html">Sales</a>
+    </div>
+  </div>
   <div id="formField">
 
     <input type="text" class="Register" id="ProductName" name="ProductName" placeholder="Product Name" required="true">
@@ -40,16 +50,14 @@
   <div class="ProductArea">
     <div class="containerProducts">
       <h3>Products List</h3>
-      <table id='productsTable'>
+      <table id='productsTable' style="width: 80%;">
         <thead>
-          <tr>
-            <th>ProductsID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Supplier</th>
-            <th>ExpiryDate</th>
-            <th>Price</th>
-          </tr>
+          <th style="width: 15%;">ProductsID</th>
+          <th style="width: 20%;">Name</th>
+          <th style="width: 15%;">Category</th>
+          <th style="width: 20;">Supplier</th>
+          <th style="width: 15%;">ExpiryDate</th>
+          <th style="width: 15%;">Price</th>
         </thead>
         <tbody>
 

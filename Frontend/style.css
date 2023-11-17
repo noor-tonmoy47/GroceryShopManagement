@@ -112,9 +112,10 @@ tr:nth-child(even) {
 }
 
 .btnSupplier {
-    margin-left: 5px;
+    margin-left: -100px;
     background-color: #005163;
     color: #ffffff;
+    width: 200px;
 }
 
 .Update {
