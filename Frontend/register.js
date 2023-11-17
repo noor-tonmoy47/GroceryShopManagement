@@ -41,6 +41,10 @@ function getProducts() {
 
 }
 
+function isAlphabet(input) {
+    const alphabetRegex = /^[A-Za-z]+$/;
+    return alphabetRegex.test(input);
+}
 getProducts();
 
 //getting the suppliers name
@@ -97,7 +101,7 @@ fetch('http://localhost:3000/api/getCategory', {
     });
 
 
-function onSubmit() {
+function onSubmit(e) {
 
 
     const nameValue = document.getElementById('ProductName').value;
@@ -117,8 +121,22 @@ function onSubmit() {
         return;
     }
 
+    let formError = false;
 
-    fetch('http://localhost:3000/products', {
+
+    if (!isAlphabet(nameValue)) {
+
+        alert('Product Name must contain only alphabets');
+        formError = true;
+    }
+
+    if (formError) {
+
+        e.preventDefault();
+        return;
+    }
+
+    fetch('http://localhost:3000/products/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
