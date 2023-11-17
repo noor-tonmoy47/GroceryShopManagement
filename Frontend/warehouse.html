@@ -2,47 +2,26 @@
 <html>
 <title>Update Warehouse</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
 <link rel="stylesheet" href="style.css">
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <link rel="stylesheet" href="warehouse.css">
-<link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
+
+<link rel="icon" href="/Logo.png" type="image/icon type">
 
 <body>
-  <!-- <div class="container mt-3">
-    <h3 class="long">Update Warehouse</h3>
-    <form>
-      <div class="row">
-        <div class="col" style="float: left;">
-          <input type="text" class="form-control" placeholder="Product Name" name="ProductID">
-        </div>
-        <div class="col" style="float: left;">
-          <input type="text" class="form-control" placeholder="Add to Current Availability" name="CurrentAvail">
-        </div>
-        <div class="col" style="float: left;">
-          <input type="submit" value="Update" class="form-control Update" placeholder="Register" name="btnRegister">
-        </div>
-      </form>
-    </div> -->
+
   <h3 class="short" style="width: 300px; margin-top: 25px;">Update Warehouse</h3>
   <div id="dropdownCategory">
 
-    <!-- <label for="Products">Select The Product</label> -->
 
     <select name="Category" id="Category" onchange="optionSelected()">
       <option value="hidden" style="display: none;">Category</option>
-      <!-- <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option> -->
+
     </select>
     <select name="Products" id="Products">
       <option value="hidden" style="display: none;">Products</option>
-      <!-- <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option> -->
+
     </select>
 
     <input type="number" id="numberInput" name="points" step="1" min="0">
@@ -59,7 +38,6 @@
       <thead>
         <tr>
           <th>Product Name</th>
-          <!-- <th>Product Name</th> -->
           <th>Current Availability</th>
         </tr>
       </thead>

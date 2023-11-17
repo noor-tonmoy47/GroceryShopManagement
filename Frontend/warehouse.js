@@ -11,7 +11,7 @@ function getWarehouse() {
         headers: {
             'Content-Type': 'application/json'
         },
-    }) // Replace with your actual API endpoint
+    })
         .then(response => response.json())
         .then(data => {
             const warehouseTable = document.getElementById('warehouseTable');
@@ -44,7 +44,7 @@ function getProductNames(categorySelectedValue) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ category: categorySelectedValue })
-    }) // Replace with your actual API endpoint
+    })
         .then(response => response.json())
         .then(data => {
             const productSelect = document.getElementById('Products');
@@ -52,12 +52,7 @@ function getProductNames(categorySelectedValue) {
 
             data.forEach(product => {
                 const option = document.createElement('option');
-                // option.innerHTML = `
-                //   <td>${supplier.SupplierID}</td>
-                //   <td>${supplier.SupplierName}</td>
-                //   <td>${supplier.ContactInfo}</td>
-                //   <td>${supplier.Address}</td>
-                // `;
+
                 option.value = product.Name;
                 option.text = product.Name;
                 productSelect.appendChild(option);
@@ -111,7 +106,7 @@ function optionSelected() {
 
     productDropDown.innerHTML = '';
 
-    // console.log(78);
+
     const categorySelectedValue = document.getElementById('Category').value;
 
     getProductNames(categorySelectedValue);
