@@ -7,34 +7,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="/Frontend/Logo.png" type="image/icon type">
+  <link rel="icon" href="/Logo.png" type="image/icon type">
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+
 </head>
 
 <body>
 
   <div class="container mt-3">
-    <form>
+    <form id="SupplierForm">
       <h3>Add Supplier</h3>
       <div class="row">
         <div class="col">
           <input type="text" class="form-control Supplier" id="name" placeholder="SupplierName" name="SupplierName"
-            required="true" autocomplete="off">
+            required autocomplete="off">
         </div>
         <div class="col">
-          <!-- <input type="tel" class="form-control Supplier" id="contact" placeholder="Contact Info" name="ContactInfo"
-            pattern="\d+" title="please enter digits only" required="true" autocomplete="off"> -->
+
           <input type="tel" class="form-control Supplier" id="contact" placeholder="Contact Info" name="ContactInfo"
-            required="true" autocomplete="off">
+            required autocomplete="off">
           <span id="contact-error" style="color: red;"></span>
         </div>
         <div class="col">
-          <input type="text" class="form-control Supplier" id="address" placeholder="Address" name="Address"
-            required="true" autocomplete="off">
+          <input type="text" class="form-control Supplier" id="address" placeholder="Address" name="Address" required
+            autocomplete="off">
         </div>
         <div class="col">
-          <input type="button" onclick="addSupplier()" value="Add" class="form-control btnSupplier" id="submitbtn"
+          <input type="button" value="Add" onclick="addSupplier()" class="form-control btnSupplier" id="submitbtn"
             placeholder="Register" name="btnAddSupplier">
         </div>
       </div>
@@ -63,25 +62,43 @@
       return isValid;
     }
 
-    function addSupplier() {
+    function isAlphabet(input) {
+      const alphabetRegex = /^[A-Za-z]+$/;
+      return alphabetRegex.test(input);
+    }
+
+    function addSupplier(e) {
 
       const name = document.getElementById("name").value;
       const contact = document.getElementById('contact').value;
       const address = document.getElementById('address').value;
 
-      console.log(contact);
+      let formError = false;
 
-      const errorElement = document.getElementById('contact-error');
 
-      if (!validateContact(contact)) {
+      if (!isAlphabet(name)) {
 
-        errorElement.textContent = 'Please enter digits only';
+        alert('Supplier Name must contain only alphabets');
+        formError = true;
+      }
+
+      else if (!validateContact(contact)) {
+        alert('Contact must contain only digits');
+        formError = true;
+      }
+
+      else if (!isAlphabet(address)) {
+        alert('Address must contain only alphabets');
+        formError = true;
+      }
+
+
+      if (formError) {
+
+        e.preventDefault();
         return;
       }
-      else {
 
-        errorElement.textContent = '';
-      }
 
       //POST request to the supplier register endpoint
       try {
