@@ -58,6 +58,11 @@ app.get('/invoice', (req, res) => {
 
     res.sendFile(path.join(__dirname, 'Frontend', 'invoice.html'));
 });
+
+app.get('/receipt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Frontend', 'receipt.html'));
+});
+
 app.get('/sales', (req, res) => {
 
     res.sendFile(path.join(__dirname, 'Frontend', 'sales.html'));
