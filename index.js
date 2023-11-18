@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
@@ -14,7 +15,11 @@ app.use(cors());
 
 app.use(express.static('Frontend'));
 
-
+app.use(session({
+    secret: 'Akhalia',
+    resave: false,
+    saveUninitialized: true,
+}));
 //Creating a MySQL connection
 const db = mysql.createConnection({
     host: 'localhost',
@@ -38,33 +43,63 @@ app.get('/', (req, res) => {
 
     res.sendFile(path.join(__dirname, 'Frontend', 'login.html'));
 });
-app.get('/home', (req, res) => {
 
+
+app.get('/home', (req, res) => {
+    const token = req.session.authToken;
+    if (!token) {
+        return res.status(401).json({ error: 'Not Authorized' });
+    }
     res.sendFile(path.join(__dirname, 'Frontend', 'home.html'));
 });
-app.get('/supplier', (req, res) => {
 
+
+app.get('/supplier', (req, res) => {
+    const token = req.session.authToken;
+    if (!token) {
+        return res.status(401).json({ error: 'Not Authorized' });
+    }
     res.sendFile(path.join(__dirname, 'Frontend', 'supplier.html'));
 });
-app.get('/register', (req, res) => {
 
+
+app.get('/register', (req, res) => {
+    const token = req.session.authToken;
+    if (!token) {
+        return res.status(401).json({ error: 'Not Authorized' });
+    }
     res.sendFile(path.join(__dirname, 'Frontend', 'regiter.html'));
 });
-app.get('/warehouse', (req, res) => {
 
+
+app.get('/warehouse', (req, res) => {
+    const token = req.session.authToken;
+    if (!token) {
+        return res.status(401).json({ error: 'Not Authorized' });
+    }
     res.sendFile(path.join(__dirname, 'Frontend', 'warehouse.html'));
 });
 app.get('/invoice', (req, res) => {
-
+    const token = req.session.authToken;
+    if (!token) {
+        return res.status(401).json({ error: 'Not Authorized' });
+    }
     res.sendFile(path.join(__dirname, 'Frontend', 'invoice.html'));
 });
 
 app.get('/receipt', (req, res) => {
+    const token = req.session.authToken;
+    if (!token) {
+        return res.status(401).json({ error: 'Not Authorized' });
+    }
     res.sendFile(path.join(__dirname, 'Frontend', 'receipt.html'));
 });
 
 app.get('/sales', (req, res) => {
-
+    const token = req.session.authToken;
+    if (!token) {
+        return res.status(401).json({ error: 'Not Authorized' });
+    }
     res.sendFile(path.join(__dirname, 'Frontend', 'sales.html'));
 });
 //Login 
@@ -94,6 +129,9 @@ app.post('/api/login', (req, res) => {
 
         //Generate a JWT token and send it as a response
         const token = jwt.sign({ username: username, role: 'admin' }, secretKey, { expiresIn: '1h' });
+
+        // Store the token in the session
+        req.session.authToken = token;
         return res.status(200).json({ token: token });
 
 
