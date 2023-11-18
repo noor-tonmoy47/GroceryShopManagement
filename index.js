@@ -111,7 +111,7 @@ app.post('/api/signup', (req, res) => {
     }
 
     // Check if the username is already taken
-    const checkUserSql = 'SELECT * FROM adminInfo WHERE User_Name = ?';
+    const checkUserSql = 'SELECT * FROM adminInfo';
     db.query(checkUserSql, [username], (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Internal server error.' });
@@ -119,7 +119,7 @@ app.post('/api/signup', (req, res) => {
 
         // If the username is already taken
         if (results.length > 0) {
-            return res.status(409).json({ error: 'Username is already taken.' });
+            return res.status(409).json({ error: 'User Registration is limited to one' });
         }
 
         // Insert the new user into the database
