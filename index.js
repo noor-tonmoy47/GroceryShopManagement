@@ -620,7 +620,23 @@ app.post('/api/invoice', (req, res) => {
                             return res.status(500).json({ error: 'moe' });
 
                         }
-                        return res.status(201).json({ message: "Invoice updated" });
+                        console.log(43);
+
+                        const sqlQuery = `Update warehouse SET Current_Availability = Current_Availability - ? WHERE ProductID = (SELECT products.ProductID FROM products WHERE products.Name = ?)`;
+
+                        db.query(sqlQuery, [quantity, name], (err, result) => {
+                            if (err) {
+                                console.log(30);
+
+                                console.error('Could not update the warehouse' + err);
+                                return res.status(500).json({ error: 'Internal server error' });
+
+                            }
+                            console.log(47);
+                            return res.status(201).json({ message: `Warehouse updated` })
+                        });
+                        // res.status(201).json({ message: "Invoice updated" });
+
                     });
 
                 });
@@ -653,7 +669,6 @@ app.post('/api/sales/:trId', (req, res) => {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
 
-    // This arrangement can be altered based on how we want the date's format to appear.
     let currentDate = `${year}-${month}-${day}`;
     // console.log(currentDate); // "17-6-2022"
     const salesQuery = 'UPDATE sales SET TransactionDate = ?, Amount = ? WHERE TransactionID = ?';

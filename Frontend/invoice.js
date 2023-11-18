@@ -175,7 +175,9 @@ function btnSubmit() {
         .then(response => response.json())
 
         .then(result => {
-            const mess = `Invoice updated`;
+            const mess = 'Warehouse updated';
+
+
 
             // alert(result.message);
 
