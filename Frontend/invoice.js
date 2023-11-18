@@ -45,7 +45,7 @@ function getProductNames(categorySelectedValue) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ category: categorySelectedValue })
-    }) // Replace with your actual API endpoint
+    })
         .then(response => response.json())
         .then(data => {
 
@@ -54,12 +54,7 @@ function getProductNames(categorySelectedValue) {
 
             data.forEach(product => {
                 const option = document.createElement('option');
-                // option.innerHTML = `
-                //   <td>${supplier.SupplierID}</td>
-                //   <td>${supplier.SupplierName}</td>
-                //   <td>${supplier.ContactInfo}</td>
-                //   <td>${supplier.Address}</td>
-                // `;
+
                 option.value = product.Name;
                 option.text = product.Name;
                 productSelect.appendChild(option);
@@ -107,12 +102,10 @@ function categorySelected() {
 
     productDropDown.innerHTML = '';
 
-    // console.log(78);
     const categorySelectedValue = document.getElementById('Category').value;
 
     getProductNames(categorySelectedValue);
-    // productDropDown.selectedIndex = 1;
-    // productSelected();
+
 }
 
 function productSelected() {
@@ -141,7 +134,6 @@ function productSelected() {
 
         .then(data => {
             console.log(data[0].Price);
-            // console.log(data.stringify);
             priceBox.value = data[0].Price
         })
 
@@ -162,7 +154,6 @@ function btnSubmit() {
 
     const priceBoxValue = document.getElementById('myText').value;
 
-    // try {
 
     fetch('http://localhost:3000/api/invoice', {
 
@@ -179,16 +170,11 @@ function btnSubmit() {
 
 
 
-            // alert(result.message);
 
             if (mess === result.message) {
 
                 gettingInfo(productDropDownValue, quanValue, priceBoxValue);
-                //             const row = document.createElement('tr');
-                //             row.innerHTML = `<td colspan="2"></td>
-                // <td style ="font-weight : bold;">Total Payable:</td>
-                //   <td id = "total"></td>`;
-                //             tbody.appendChild(row);
+
             }
 
         }).catch(error => {
@@ -205,7 +191,6 @@ function generateID() {
     uniqueNumber = Date.now() % 1000000000;
 }
 function checkOut() {
-    // const uniqueTimestamp = Date.now() + Math.floor(Math.random() * 1000);
     const totalAmount = document.getElementById('total').innerText;
     console.log(totalAmount);
 
@@ -228,7 +213,6 @@ function checkOut() {
 
         .catch(error => console.log(error.message))
 
-    // transactionID++;
     buttonAddCount = 0;
     uniqueNumber = 0;
     window.location.href = 'home.html';
@@ -293,7 +277,7 @@ function generateReceipt() {
 
         .catch(error => console.log(error.message))
 
-    // transactionID++;
+
     buttonAddCount = 0;
     uniqueNumber = 0;
 
