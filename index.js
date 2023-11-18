@@ -161,20 +161,30 @@ app.post('/api/signup', (req, res) => {
         }
 
         // If the username is already taken
-        if (results.length > 0) {
-            return res.status(409).json({ error: 'User Registration is limited to one' });
+        if (results.length > 1) {
+            return res.status(409).json({ error: 'User Registration is limited to two' });
         }
 
-
-        const insertUserSql = 'INSERT INTO adminInfo (User_Name, User_Email, User_Password) VALUES (?, ?, ?)';
-
-        db.query(insertUserSql, [username, useremail, password], (err, results) => {
+        const checkUserExists = 'SELECT * FROM adminInfo WHERE User_Name = ?';
+        db.query(checkUserExists, [username], (err, results) => {
             if (err) {
                 return res.status(500).json({ error: 'Internal server error.' });
             }
+            if (results.length > 0) {
+                return res.status(409).json({ error: 'User already exists' });
+            }
 
-            return res.status(201).json({ message: 'User created successfully.' });
+            const insertUserSql = 'INSERT INTO adminInfo (User_Name, User_Email, User_Password) VALUES (?, ?, ?)';
+
+            db.query(insertUserSql, [username, useremail, password], (err, results) => {
+                if (err) {
+                    return res.status(500).json({ error: 'Internal server error.' });
+                }
+
+                return res.status(201).json({ message: 'User created successfully.' });
+            });
         });
+
 
     });
 });
