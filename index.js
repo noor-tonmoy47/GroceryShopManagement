@@ -127,11 +127,16 @@ app.post('/api/login', (req, res) => {
         }
 
 
-        //Generate a JWT token and send it as a response
+
         const token = jwt.sign({ username: username, role: 'admin' }, secretKey, { expiresIn: '1h' });
 
         // Store the token in the session
         req.session.authToken = token;
+
+
+
+
+
         return res.status(200).json({ token: token });
 
 
@@ -160,8 +165,9 @@ app.post('/api/signup', (req, res) => {
             return res.status(409).json({ error: 'User Registration is limited to one' });
         }
 
-        // Insert the new user into the database
+
         const insertUserSql = 'INSERT INTO adminInfo (User_Name, User_Email, User_Password) VALUES (?, ?, ?)';
+
         db.query(insertUserSql, [username, useremail, password], (err, results) => {
             if (err) {
                 return res.status(500).json({ error: 'Internal server error.' });
@@ -169,6 +175,7 @@ app.post('/api/signup', (req, res) => {
 
             return res.status(201).json({ message: 'User created successfully.' });
         });
+
     });
 });
 
